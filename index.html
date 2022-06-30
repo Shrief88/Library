@@ -5,10 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
+    <div class="header">
+        <p>Library</p>
+        <button id="addButton">+ Add Book</button>
+    </div>
+    <div class="content">
+        
+    </div>
+
     
+    <div id="overlayForm">
+       <form action="">
+            <div class="form-cell">
+                <label for="title">*Book Title</label>
+                <input type="text" id="title" name="title"  minlength="3" required>
+            </div>
+            <div class="form-cell">
+                <label for="author">*Author</label>
+                <input type="text" id="author" name="author"  minlength="3" required>
+            </div>
+            <div class="form-cell">
+                <label for="pages">*Number Of Pages</label>
+                <input type="number" id="pages" name="pages"  required>
+            </div>
+            <div>
+                <input type="checkbox" id="read">
+                <label>Have you read it?</label>
+            </div>
+            <button type="submit" id="submitButton">Add Book</button>
+       </form>
+    </div>
+    
+
+
+
     
 </body>
 </html>
