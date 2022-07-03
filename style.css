@@ -18,6 +18,8 @@ body{
     background-color: #eee;    
 }
 
+/*****************************************Header************************************/
+
 .header{
     padding: 40px;
     display: flex;
@@ -35,9 +37,12 @@ body{
     border-radius: 10px;    
 }
 
-.header  button:hover{
+.header button:hover{
     background-color: #D7D7D7 ;
 }
+
+
+/******************************************content**********************************/
 
 .content{
     flex: 1;
@@ -58,10 +63,33 @@ body{
     border-left: 10px solid #F900BF;
 }
 
-.card p:first-child{
+.title{
     font-size: 1.4rem;
     font-weight: 600;
 }
+
+.buttonCard{
+    padding: 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 10px;   
+    background-color: #eee;
+    align-self: center;
+}
+
+.activeButton{
+    background-color: #D7D7D7;
+}
+
+.row{
+    display: flex;
+    gap : 10px
+}
+
+
+
+/****************************************************Form*******************************/
+
 
 #overlayForm{
     display: none;
@@ -101,13 +129,13 @@ form{
     font-size: 0.8rem;
 }
 
-#submitButton{
+.button{
     padding: 10px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     border: none;
     border-radius: 10px;   
     background-color: white;
-    width: 70%;
+    width: 60%;
     align-self: center;
 }
 

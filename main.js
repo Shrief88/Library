@@ -1,6 +1,3 @@
-
-
-
 function Book(title,author,numberOfPages,read){
     this.title = title;
     this.author = author;
@@ -17,8 +14,8 @@ Book.prototype.info = function(){
 
 const book1 = new Book('A Game of Thrones','George R. R. Martin',694,false);
 const book2 = new Book('A Clash of Kings','George R. R. Martin',761,true);
-
 let myLibrary = [book1,book2];
+
 
 function addBookToLibrary(Book) {
     myLibrary.push(Book);
@@ -27,23 +24,50 @@ function addBookToLibrary(Book) {
 
 function createBookCard(book){
     const card = document.createElement('div');
-    const content = document.querySelector('.content')
-
     card.classList.add('card')
 
     const title = document.createElement('p');
-    const author = document.createElement('p');
-    const numberOfPages= document.createElement('p');
-
+    title.classList.add('title');
     title.textContent = book.title;
-    author.textContent = "Author: " + book.author;
-    numberOfPages.textContent = "Number of Pages: " + book.numberOfPages;
-
     card.append(title);
-    card.append(author);
-    card.append (numberOfPages);
 
+    const author = document.createElement('p');
+    author.textContent = "By: " + book.author;
+    card.append(author);
+
+    const numberOfPages= document.createElement('p');
+    numberOfPages.textContent = "Number of Pages: " + book.numberOfPages; 
+    
+    const readButton = document.createElement('button');
+    readButton.textContent = 'Read';
+    readButton.classList.add('buttonCard');
+    if(book.read === true){
+        readButton.classList.add('activeButton');
+    }
+    readButton.addEventListener('click',()=>{
+        readButton.classList.toggle('activeButton'); 
+        book.read = true ? false : true;
+    })
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('buttonCard');
+    
+
+
+    const rowDiv = document.createElement('div');
+    rowDiv.classList.add('row');
+    rowDiv.append(readButton);
+    rowDiv.append(deleteButton);
+
+    card.append(rowDiv);
+
+    const content = document.querySelector('.content');   
     content.append(card);
+
+    
+
+
 }
 
 function displayAllBooks(myLibrary){
@@ -59,11 +83,12 @@ const submitButton = document.querySelector('#submitButton');
 
 displayAllBooks(myLibrary);
 
-
-
 addButton.addEventListener('click',()=>{
     overlayForm.style.display = "flex";
 })
+
+
+
 
 
 submitButton.addEventListener('click',()=>{
@@ -81,6 +106,7 @@ submitButton.addEventListener('click',()=>{
     document.querySelector('#author').value = '';
     document.querySelector('#pages').value = '';
 })
+
 
 
 
