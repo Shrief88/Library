@@ -17,9 +17,9 @@
         
     </div>
 
-    
+
     <div id="overlayForm">
-       <form action="">
+       <form target="frame">
             <div class="form-cell">
                 <label for="title">*Book Title</label>
                 <input type="text" id="title" name="title"  minlength="3" required>
@@ -36,9 +36,11 @@
                 <input type="checkbox" id="read">
                 <label>Have you read it?</label>
             </div>
-            <button type="submit" id="submitButton">Add Book</button>
+            <button id="submitButton">Add Book</button>
        </form>
     </div>
+
+    <iframe name="frame" style="display:none;"></iframe>
     
 
 

@@ -1,8 +1,9 @@
-let myLibrary = [];
 
-function Book(title,autor,numberOfPages,read){
+
+
+function Book(title,author,numberOfPages,read){
     this.title = title;
-    this.autor = autor;
+    this.author = author;
     this.numberOfPages = numberOfPages;
     this.read = read;
 }
@@ -13,13 +14,42 @@ Book.prototype.info = function(){
     return info;
 }
 
+
+const book1 = new Book('A Game of Thrones','George R. R. Martin',694,false);
+const book2 = new Book('A Clash of Kings','George R. R. Martin',761,true);
+
+let myLibrary = [book1,book2];
+
 function addBookToLibrary(Book) {
     myLibrary.push(Book);
 } 
 
 
-function displayBooks(){
-    myLibrary.map( book=> console.table(book));
+function createBookCard(book){
+    const card = document.createElement('div');
+    const content = document.querySelector('.content')
+
+    card.classList.add('card')
+
+    const title = document.createElement('p');
+    const author = document.createElement('p');
+    const numberOfPages= document.createElement('p');
+
+    title.textContent = book.title;
+    author.textContent = "Author: " + book.author;
+    numberOfPages.textContent = "Number of Pages: " + book.numberOfPages;
+
+    card.append(title);
+    card.append(author);
+    card.append (numberOfPages);
+
+    content.append(card);
+}
+
+function displayAllBooks(myLibrary){
+    for (const book of myLibrary){
+       createBookCard(book);
+    }
 }
 
 
@@ -27,6 +57,7 @@ const overlayForm = document.querySelector('#overlayForm')
 const addButton = document.querySelector('#addButton');
 const submitButton = document.querySelector('#submitButton');
 
+displayAllBooks(myLibrary);
 
 
 
@@ -43,9 +74,16 @@ submitButton.addEventListener('click',()=>{
 
     const newBook = new Book(title,author,numberOfPages,read);
     addBookToLibrary(newBook);
-    console.table(myLibrary);
 
+    overlayForm.style.display = "none";
+    createBookCard(newBook);
+    document.querySelector('#title').value ='';
+    document.querySelector('#author').value = '';
+    document.querySelector('#pages').value = '';
 })
+
+
+
 
 
 
