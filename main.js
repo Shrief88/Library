@@ -57,9 +57,12 @@ content.addEventListener('click',(e)=>{
     }
 })
 
-
-
-
+overlayForm.addEventListener('click',(e)=>{
+    if(e.target.getAttribute('id') === 'overlayForm'){
+        overlayForm.style.display = "none";
+    };
+   
+})
 
 
 function Book(title,author,numberOfPages,read){
