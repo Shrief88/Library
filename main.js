@@ -44,6 +44,23 @@ content.addEventListener('click',(e)=>{
     }
 })
 
+content.addEventListener('click',(e)=>{
+    if(e.target.classList.contains('read')){
+        e.target.classList.toggle('activeButton');
+        const index = e.target.parentElement.parentElement.getAttribute('data-id');
+        myLibrary.find((book)=>{
+           if(book.id == index){
+                book.read =  (book.read === true) ? false:true;
+                setData(myLibrary);
+           }
+        })
+    }
+})
+
+
+
+
+
 
 function Book(title,author,numberOfPages,read){
     this.id = Date.now();
@@ -76,14 +93,11 @@ function createBookCard(book){
     const readButton = document.createElement('button');
     readButton.textContent = 'Read';
     readButton.classList.add('buttonCard');
+    readButton.classList.add('read');
     if(book.read === true){
         readButton.classList.add('activeButton');
     }
-    readButton.addEventListener('click',()=>{
-        readButton.classList.toggle('activeButton'); 
-        book.read = true ? false : true;
-    })
-
+    
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.classList.add('buttonCard');
