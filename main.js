@@ -37,7 +37,12 @@ form.addEventListener('submit',(e)=>{
 
 
 
-
+content.addEventListener('click',(e)=>{
+    if(e.target.classList.contains('del')){
+        deleteElementFromLocal(e.target.parentElement.parentElement.getAttribute('data-id'));
+        e.target.parentElement.parentElement.remove();
+    }
+})
 
 
 function Book(title,author,numberOfPages,read){
@@ -106,7 +111,10 @@ function setData(myLibrary){
     window.localStorage.setItem("books",JSON.stringify(myLibrary));
 }
 
-
+function deleteElementFromLocal(book_id){
+    let myNewLibrary = myLibrary.filter((book)=> book.id != book_id );
+    setData(myNewLibrary);
+}
 
 
 
