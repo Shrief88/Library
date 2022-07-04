@@ -1,26 +1,56 @@
+let myLibrary = [];
+const overlayForm = document.querySelector('#overlayForm')
+const addButton = document.querySelector('#addButton');
+const submitButton = document.querySelector('#submitButton');
+const form = document.querySelector('#form');
+const content = document.querySelector('.content');
+
+
+if(localStorage.getItem('books')){
+    myLibrary=JSON.parse(localStorage.getItem('books'));
+}
+
+displayAllBooks(myLibrary);
+
+addButton.addEventListener('click',()=>{
+    overlayForm.style.display = "flex";
+})
+
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    let title = document.querySelector('#title').value;
+    let author = document.querySelector('#author').value;
+    let numberOfPages = document.querySelector('#pages').value;
+    let read = document.querySelector('#read').checked;
+
+    const newBook = new Book(title,author,numberOfPages,read);
+    addBookToLibrary(newBook);
+    setData(myLibrary);
+
+    overlayForm.style.display = "none";
+    createBookCard(newBook);
+    document.querySelector('#title').value ='';
+    document.querySelector('#author').value = '';
+    document.querySelector('#pages').value = '';
+})
+
+
+
+
+
+
 function Book(title,author,numberOfPages,read){
+    this.id = Date.now();
     this.title = title;
     this.author = author;
     this.numberOfPages = numberOfPages;
     this.read = read;
 }
 
-Book.prototype.info = function(){
-    let readingStatu = this.read ? 'read' : 'not read yet';
-    let info = `${this.title} by ${this.autor}, ${this.numberOfPages} pages, ${readingStatu}`
-    return info;
-}
-
-
-const book1 = new Book('A Game of Thrones','George R. R. Martin',694,false);
-const book2 = new Book('A Clash of Kings','George R. R. Martin',761,true);
-let myLibrary = [book1,book2];
-
-
 function addBookToLibrary(Book) {
     myLibrary.push(Book);
-} 
-
+}
 
 function createBookCard(book){
     const card = document.createElement('div');
@@ -52,22 +82,18 @@ function createBookCard(book){
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.classList.add('buttonCard');
+    deleteButton.classList.add('del');
     
-
-
     const rowDiv = document.createElement('div');
     rowDiv.classList.add('row');
     rowDiv.append(readButton);
     rowDiv.append(deleteButton);
 
     card.append(rowDiv);
+    card.setAttribute('data-id',book.id);
 
     const content = document.querySelector('.content');   
     content.append(card);
-
-    
-
-
 }
 
 function displayAllBooks(myLibrary){
@@ -76,36 +102,15 @@ function displayAllBooks(myLibrary){
     }
 }
 
-
-const overlayForm = document.querySelector('#overlayForm')
-const addButton = document.querySelector('#addButton');
-const submitButton = document.querySelector('#submitButton');
-
-displayAllBooks(myLibrary);
-
-addButton.addEventListener('click',()=>{
-    overlayForm.style.display = "flex";
-})
+function setData(myLibrary){
+    window.localStorage.setItem("books",JSON.stringify(myLibrary));
+}
 
 
 
 
 
-submitButton.addEventListener('click',()=>{
-    let title = document.querySelector('#title').value;
-    let author = document.querySelector('#author').value;
-    let numberOfPages = document.querySelector('#pages').value;
-    let read = document.querySelector('#read').checked;
 
-    const newBook = new Book(title,author,numberOfPages,read);
-    addBookToLibrary(newBook);
-
-    overlayForm.style.display = "none";
-    createBookCard(newBook);
-    document.querySelector('#title').value ='';
-    document.querySelector('#author').value = '';
-    document.querySelector('#pages').value = '';
-})
 
 
 
